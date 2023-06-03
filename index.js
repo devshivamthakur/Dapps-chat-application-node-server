@@ -18,10 +18,11 @@ gun.on('in', (msg) => {
   const { '#': id, put } = msg;
   const { userId, message } = put;
   
-  if (msg.put && userId && message) {
+  if (msg.put && userId) {
     const hashedUserId = crypto.createHash('sha256').update(userId).digest('hex');
     const encryptedMessage = SEA.encrypt(message, hashedUserId);
-
     put.encryptedMessage = encryptedMessage;
   }
+  
+  
 });
